@@ -18,6 +18,7 @@ Route::get('projects','ApplicationController@emailApplication')->middleware("aut
 Route::get('projects/list','ApplicationController@chatApplication')->middleware("auth");
 Route::post('project/delete/{id}', 'ProjectController@delete')->middleware("auth");
 Route::post('project/create', 'ProjectController@create')->middleware("auth");
+Route::post('project/approve/{id}', 'ProjectController@approve')->middleware("auth");
 
 Route::group(['prefix' => 'dashboard'], function () {
   Route::get('ecommerce','DashboardController@dashboardEcommerce')->name('dashboard-ecommerce');

@@ -30,4 +30,13 @@ class ProjectController extends Controller
 
         return $nProject;
     }
+
+    public function approve($id) {
+        $user = Auth::user();
+        $project = Project::find($id);
+        if ($user->role === 1) {
+            $project->status = 1;
+            $project->save();
+        }
+    }
 }

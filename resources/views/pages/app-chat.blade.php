@@ -125,11 +125,24 @@
       $(".approveBtn").remove();
     }
     if (data.status === 0) {
-      $(".buttons").append(`<button type="button" class="btn btn-light-success approveBtn" data-dismiss="modal"">
+      $(".buttons").append(`<button type="button" id="${data.id}" class="btn btn-light-success approveBtn" data-dismiss="modal" onclick="approve(this)">
                         <i class="bx bx-x d-block d-sm-none"></i>
                         <span class="d-none d-sm-block">Approuver</span>
                       </button>`)
     }
+  }
+
+  function approve(el) {
+    $.ajax({
+      method: "POST",
+      url: `/project/approve/${$(el).prop("id")}`,
+      data: {
+        "_token": '{{csrf_token()}}'
+      },
+      success: function() {
+        $("approveBtn").remove();
+      }
+    })
   }
 
   function deleteById(el) {
