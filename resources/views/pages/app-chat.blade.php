@@ -15,7 +15,7 @@
           <div class="row no-gutters">
           @foreach($projects as $project)
           @if($project->status === 1)
-          <div class="" id="modal-{{$project->id}}">
+          <div class="col-md-4 col-sm-6 mb-sm-1" id="modal-{{$project->id}}">
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">{{ $project->name }}</h4>
@@ -37,7 +37,7 @@
               </div>
             </div>
           @elseif($project->status === 0 && Auth::user()->role === 1)
-          <div class="" id="modal-{{$project->id}}">
+          <div class="col-md-4 col-sm-6 mb-sm-1" id="modal-{{$project->id}}">
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">{{ $project->name }}</h4>
@@ -56,6 +56,7 @@
                   <br>
                   <button class="btn btn-info" data-toggle="modal" data-target="#inlineForm" onclick="setData({{$project}},  '{{App\Models\User::find($project->user_id)->first()->name}}')">Voir</button>
                 </div>
+                <i class="menu-livicon" data-icon="legal" data-options="name: asterik.svg; style: solid; size: 30px;"></i>
               </div>
             </div>
           @endif
