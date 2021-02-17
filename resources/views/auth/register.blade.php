@@ -1,45 +1,81 @@
-@extends('layout.authentication')
-@section('title', 'Register')
+@extends('layouts.fullLayoutMaster')
 
+{{-- page title --}}
+@section('title','Register')
+{{-- page scripts --}}
+@section('page-styles')
+<link rel="stylesheet" type="text/css" href="{{asset('css/pages/authentication.css')}}">
+@endsection
 
 @section('content')
-<div class="card">
-    <div class="text-center mb-5">
-        <a class="header-brand" href="{{route('hrms.index')}}"><i class="fe fe-command brand-logo"></i></a>
+<!-- register section starts -->
+<section class="row flexbox-container">
+  <div class="col-xl-8 col-10">
+    <div class="card bg-authentication mb-0">
+      <div class="row m-0">
+        <!-- register section left -->
+        <div class="col-md-6 col-12 px-0">
+          <div class="card disable-rounded-right mb-0 p-2 h-100 d-flex justify-content-center">
+            <div class="card-header pb-1">
+              <div class="card-title">
+                <h4 class="text-center mb-2">Inscription</h4>
+              </div>
+            </div>
+            <div class="text-center">
+              <p> <small> Entrer vos détails pour faire partir de la communauté</small>
+              </p>
+            </div>
+            <div class="card-body">
+              <form method="POST" action="{{ route('register') }}">
+                @csrf
+                <div class="form-group mb-50">
+                  <label class="text-bold-600" for="name">Nom</label>
+                  <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}"  autocomplete="name" autofocus placeholder="Full Name">
+                  @error('name')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+                  <div class="form-group mb-50">
+                  <label class="text-bold-600" for="email">Email</label>
+                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email" placeholder="Email address">
+                  @error('email')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+                <div class="form-group mb-2">
+                  <label class="text-bold-600" for="password">Mot de passe</label>
+                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="new-password" placeholder="Password">
+                  @error('password')
+                  <span class="invalid-feedback" role="alert">
+                    <strong>{{ $message }}</strong>
+                  </span>
+                  @enderror
+                </div>
+                <div class="form-group mb-2">
+                  <label class="text-bold-600" for="password-confirm">Confirmation mot de passe</label>
+                  <input id="password-confirm" type="password" class="form-control" name="password_confirmation"  autocomplete="new-password" placeholder="Confirm Password">
+                </div>
+                <button type="submit" class="btn btn-primary glow position-relative w-100">SIGN UP<i
+                  id="icon-arrow" class="bx bx-right-arrow-alt"></i></button>
+              </form>
+              <hr>
+              <div class="text-center"><small class="mr-25">Déja inscrit?</small>
+                <a href="{{asset('login')}}"><small>Connexion</small> </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- image section right -->
+        <div class="col-md-6 d-md-block d-none text-center align-self-center p-3">
+            <img class="img-fluid" src="{{asset('images/pages/register.png')}}" alt="branding logo">
+        </div>
+      </div>
     </div>
-    <div class="card-body">
-        <div class="card-title">Create new account</div>
-        <div class="form-group">
-        <form method="POST" action="{{ route('register') }}">
-                        @csrf
-            <label class="form-label">Name</label>
-            <input id="name" name="name" type="text" class="form-control" placeholder="Enter name">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Email address</label>
-            <input id="email" name="email" type="email" class="form-control" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Password</label>
-            <input id="password" name="password" type="password" class="form-control" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <label class="form-label">Password Confirm</label>
-            <input id="password-confirm" name="password_confirmation" type="password" class="form-control" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" />
-            <span class="custom-control-label">Agree the <a href="#">terms and policy</a></span>
-            </label>
-        </div>
-        <div class="form-footer">
-            <button type="submit" class="btn btn-primary btn-block">Create new account</button>
-        </div>
-        </form>
-    </div>
-    <div class="text-center text-muted">
-        Already have account? <a href="{{route('authentication.login')}}">Sign in</a>
-    </div>
-</div>
-@stop
+  </div>
+</section>
+<!-- register section endss -->
+@endsection

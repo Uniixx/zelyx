@@ -2,46 +2,32 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Project;
 use Illuminate\Http\Request;
+use App\Models\Project;
 use Auth;
 
-use Illuminate\Routing\Controller as BaseController;
-
-class ProjectController extends BaseController
+class ProjectController extends Controller
 {
-    function index2(){
-        return view('project.index2');
-    }
-    function list(){
-        return view('project.list', ['projects' => Project::all()]);
-    }
-    function taskboard(){
-        return view('project.taskboard');
-    }
-    function ticket(){
-        return view('project.ticket');
-    }
-    function ticketdetails(){
-        return view('project.ticketdetails');
-    }
-    function clients(){
-        return view('project.clients');
-    }
-    function todo(){
-        return view('project.todo');
+    public function delete($id) {
+        $user = Auth::user();
+        $project = Project::find($id);
+        if ($user->role === 1 || $project->user_id === $user->id) {
+            $project->delete();
+        }
     }
 
-    function create(Request $request) {
-        Project::create(
-            [
-                'title' => $request->title,
-                'description' => $request->description,
-                'budget' => $request->budget,
-                'user_id' => Auth::user()->id,
-                'status' => '0'
-            ]);
+    public function create(Request $request) {
+        $project = Project::create([
+            "status" => 0,
+            "name" => htmlspecialchars($request->name),
+            "description" => htmlspecialchars($request->description),
+            "budget" => $request->budget,
+            "type" => $request->type,
+            "user_id" => Auth::user()->id
+        ]);
 
-       return redirect('project/list');
+        $nProject = Project::find($project->id);
+
+        return $nProject;
     }
 }

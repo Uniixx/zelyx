@@ -1,48 +1,79 @@
-@extends('layout.authentication')
-@section('title', 'Login')
+@extends('layouts.fullLayoutMaster')
+{{-- title --}}
 
+@section('title','Login')
+
+{{-- page scripts --}}
+
+@section('page-styles')
+<link rel="stylesheet" type="text/css" href="{{asset('css/pages/authentication.css')}}">
+@endsection
 
 @section('content')
-<div class="card">
-    <div class="text-center mb-2">
-        <a class="header-brand" href="{{route('hrms.index')}}"><i class="fe fe-command brand-logo"></i></a>
+<!-- login page start -->
+<section id="auth-login" class="row flexbox-container">
+  <div class="col-xl-8 col-11">
+    <div class="card bg-authentication mb-0">
+      <div class="row m-0">
+        <!-- left section-login -->
+        <div class="col-md-6 col-12 px-0">
+          <div class="card disable-rounded-right mb-0 p-2 h-100 d-flex justify-content-center">
+            <div class="card-header pb-1">
+              <div class="card-title">
+                <h4 class="text-center mb-2">Rebienvenue!</h4>
+              </div>
+            </div>
+            <div class="card-body">
+              {{-- form  --}}
+              <form method="POST" action="{{ route('login') }}">
+                @csrf
+                <div class="form-group mb-50">
+                  <label class="text-bold-600" for="email">Email</label>
+                  <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}"  autocomplete="email" autofocus placeholder="Email address">
+                  @error('email')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                  @enderror
+                </div>
+                <div class="form-group">
+                  <label class="text-bold-600" for="password">Mot de passe</label>
+                  <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password"  autocomplete="current-password" placeholder="Password">
+                  @error('password')
+                    <span class="invalid-feedback" role="alert">
+                      <strong>{{ $message }}</strong>
+                    </span>
+                    @enderror
+                </div>
+                <div class="form-group d-flex flex-md-row flex-column justify-content-between align-items-center">
+                  <div class="text-left">
+                    <div class="checkbox checkbox-sm">
+                      <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
+                      <label class="form-check-label" for="remember">
+                        <small>Keep me logged in</small>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+                <button type="submit" class="btn btn-primary glow w-100 position-relative">Connexion
+                  <i id="icon-arrow" class="bx bx-right-arrow-alt"></i>
+                </button>
+              </form>
+              <hr>
+              <div class="text-center">
+                <small class="mr-25">Vous n'avez pas de compte?</small>
+                <a href="{{route('register')}}"><small>Inscription</small></a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- right section image -->
+        <div class="col-md-6 d-md-block d-none text-center align-self-center p-3">
+          <img class="img-fluid" src="{{asset('images/pages/login.png')}}" alt="branding logo">
+        </div>
+      </div>
     </div>
-    <div class="card-body">
-    <form method="POST" action="{{ route('login') }}">
-                        @csrf
-        <div class="card-title">Login to your account</div>
-        <div class="form-group">
-            <input id="email" name="email" type="email" class="form-control" aria-describedby="emailHelp" placeholder="Enter email">
-            @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-        </div>
-        <div class="form-group">
-        @error('password')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-            <label class="form-label">Password<a href="forgot-password.html" class="float-right small">I forgot password</a></label>
-            <input id="password" name="password" type="password" class="form-control" placeholder="Password">
-        </div>
-        <div class="form-group">
-            <label class="custom-control custom-checkbox">
-            <input type="checkbox" class="custom-control-input" />
-            <span class="custom-control-label">Remember me</span>
-            </label>
-        </div>
-        <div class="form-footer">
-        <button type="submit" class="btn btn-primary btn-block">
-        Sign in
-        </button>
-        </div>
-    </div>
-    </form>
-    <div class="text-center text-muted">
-        Don't have account yet? <a href="{{route('authentication.register')}}">Sign up</a>
-    </div>
-</div>
-@stop
+  </div>
+</section>
+<!-- login page ends -->
+@endsection

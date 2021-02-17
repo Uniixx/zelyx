@@ -1,0 +1,40 @@
+{
+  "menu": [
+    {
+      "url": "/",
+      "name": "Dashboard",
+      "slug": "dashboard",
+      "icon": "desktop"
+    },
+    {
+      "navheader": "Projets"
+    },
+    {
+      "url": "projects/list",
+      "name": "Projects",
+      "slug": "app-projects",
+      "icon": "idea"
+    },
+    {
+      "url": "projects",
+      "name": "My Projects",
+      "slug": "app-projects",
+      "icon": "notebook"
+    },
+    {
+      "navheader": "Others"
+    },
+    {
+      "url": "donate",
+      "name": "Donate",
+      "slug": "app-donate",
+      "icon": "heart"
+    },
+    {
+      "url": "https://discord.gg/DAYfyUEdqg",
+      "name": "Discord",
+      "slug": "app-donate",
+      "icon": "users"
+    }
+  ]
+}

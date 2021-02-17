@@ -2,23 +2,33 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Routing\Controller as BaseController;
+use Illuminate\Http\Request;
 
-class AuthenticationController extends BaseController
+class AuthenticationController extends Controller
 {
-    function login(){
-        return view('authentication.login');
-    }
-    function register(){
-        return view('authentication.register');
-    }
-    function forgotpassword(){
-        return view('authentication.forgotpassword');
-    }
-    function error404(){
-        return view('authentication.error404');
-    }
-    function error500(){
-        return view('authentication.error500');
-    }
+  //Login page
+  public function loginPage(){
+    $pageConfigs = ['bodyCustomClass'=> 'bg-full-screen-image'];
+    return view('pages.auth-login',['pageConfigs' => $pageConfigs]);
+  }
+  //Register page
+  public function registerPage(){
+    $pageConfigs = ['bodyCustomClass'=> 'bg-full-screen-image'];
+    return view('pages.auth-register',['pageConfigs' => $pageConfigs]);
+  }
+   //forget Password page
+   public function forgetPasswordPage(){
+    $pageConfigs = ['bodyCustomClass'=> 'bg-full-screen-image'];
+    return view('pages.auth-forgot-password',['pageConfigs' => $pageConfigs]);
+  }
+   //reset Password page
+   public function resetPasswordPage(){
+    $pageConfigs = ['bodyCustomClass'=> 'bg-full-screen-image'];
+    return view('pages.auth-reset-password',['pageConfigs' => $pageConfigs]);
+  }
+   //auth lock page
+   public function authLockPage(){
+    $pageConfigs = ['bodyCustomClass'=> 'bg-full-screen-image'];
+    return view('pages.auth-lock-screen',['pageConfigs' => $pageConfigs]);
+  }
 }

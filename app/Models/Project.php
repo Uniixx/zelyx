@@ -2,15 +2,19 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Project extends Model
 {
+    use HasFactory;
+
     protected $fillable = [
-        'title',
+        'status',
+        'type',
         'description',
+        'name',
         'budget',
-        'user_id',
-        'status'
+        'user_id'
     ];
 }
