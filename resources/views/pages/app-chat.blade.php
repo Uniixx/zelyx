@@ -15,7 +15,7 @@
           <div class="row no-gutters">
           @foreach($projects as $project)
           @if($project->status === 1)
-          <div class="col-md-4 col-sm-6 mb-sm-1" id="modal-{{$project->id}}">
+          <div class="" id="modal-{{$project->id}}">
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">{{ $project->name }}</h4>
@@ -37,7 +37,7 @@
               </div>
             </div>
           @elseif($project->status === 0 && Auth::user()->role === 1)
-          <div class="col-md-4 col-sm-6 mb-sm-1" id="modal-{{$project->id}}">
+          <div class="" id="modal-{{$project->id}}">
               <div class="card">
                 <div class="card-header">
                   <h4 class="card-title">{{ $project->name }}</h4>
@@ -141,6 +141,7 @@
       },
       success: function() {
         $("approveBtn").remove();
+        document.location.reload();
       }
     })
   }
